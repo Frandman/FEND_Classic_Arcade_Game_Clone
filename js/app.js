@@ -1,7 +1,8 @@
-/* Implementation of the Enemy class.
+
+/* Implementation of Enemy class.
  * Constructor function take two parameters that defines
- * the initial position of each enemy instance.
- * The initial speed of each enemy is set at creation as a random
+ * initial position of each enemy instance.
+ * Initial speed of each enemy is set at creation as a random
  * number between 100 and 150.
  */
 
@@ -59,9 +60,10 @@ Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+
 /* Update function. If player goes into blue area, it's returned to initial position
- * and the score is increased by 100. The level is updated taking the integer part
- * as a result of dividing by a thousand the number of points.
+ * and the score is increased by 100. Level is updated taking the integer part
+ * of resulting division between number of points and 1000.
  */
 
 Player.prototype.update = function () {
@@ -74,7 +76,7 @@ Player.prototype.update = function () {
     this.level = Math.floor(this.score/1000);
 };
 
-/* Function for handling key presses, it takes a string representing the key as a parameter.
+/* Function for handling key presses, it takes a string representing key pressed as a parameter.
  *  Checks if player is between bounds before processing each movement
  */
 
