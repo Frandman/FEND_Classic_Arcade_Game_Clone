@@ -145,13 +145,15 @@ var Engine = (function(global) {
 
 
         renderEntities();
-        ctx.clearRect(0, 0, canvas.width, 50);
-        ctx.font = "25px Sans";
-        ctx.textAlign = "left";
-        ctx.fillStyle = "black";
-        ctx.fillText('level: '+ player.level, 5, 45);
-        ctx.fillText('score: ' + player.score, 200, 45);
 
+        ctx.clearRect(0, 0, canvas.width, 50); // clear previous information
+        ctx.font = "25px Sans"; // set font size and family
+        ctx.textAlign = "left"; // set text to be rendered at left
+        ctx.fillStyle = "black"; // set colour
+        ctx.fillText('level: '+ player.level, 5, 45); // display level
+        ctx.fillText('score: ' + player.score, 200, 45); //display score
+
+        /* For loop to render lifes */
         for (var i = 0; i < player.lifes; i++) {
             ctx.drawImage(Resources.get('images/Heart.png'), 380 + i*35, 45, 30, 50);
         }
@@ -175,9 +177,8 @@ var Engine = (function(global) {
         gem.render();
     }
 
-    /* This function does nothing but it could have been a good place to
-     * handle game reset states - maybe a new game menu or a game over screen
-     * those sorts of things. It's only called once by the init() method.
+    /* If lifes number falls below 1, reset method is called in order to reset lives and score
+     * 
      */
     function reset() {
 
@@ -196,7 +197,6 @@ var Engine = (function(global) {
         'images/enemy-bug.png',
         'images/char-boy.png',
         'images/Heart.png', 
-        'images/nyan-enemy.png',
         'images/GemBlue.png',
         'images/GemGreen.png', 
         'images/GemOrange.png'

@@ -2,8 +2,8 @@
 /* Implementation of the Enemy class.
  * Constructor function take two parameters that defines 
  * the initial position of each enemy instance. 
- * The initial speed of each enemy set at creation as a random
- * number between 100 and 250.
+ * The initial speed of each enemy is set at creation as a random
+ * number between 100 and 150.
  */
  
 var Enemy = function(initX, initY) {
@@ -14,8 +14,9 @@ var Enemy = function(initX, initY) {
 }
 
 /* Update method for Enemy class. It checks if the enemy goes
- * off canvas, in this case it reasingns the x coordinate to 
- * initial position.
+ * off canvas, if this is the case, it reasingns the x coordinate to 
+ * initial position. There are four levels of difficulty. The speed 
+ * of enemies increases with each new level.
  */
 
 Enemy.prototype.update = function(dt) {
@@ -41,6 +42,10 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
+/* Player constructor function object. 
+ * The function sets the level the score, lives, and the initial coordinates.
+ */
+
 var Player = function() {
     this.sprite = 'images/char-boy.png';
     this.initX = 200;
@@ -55,6 +60,11 @@ var Player = function() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 
+/* Update function. If player goes into blue area, it's returned to initial position 
+ * and the score is increased by 100. The level is updated taking the integer part 
+ * as a result of dividing by a thousand the number of points.
+ */
+
 Player.prototype.update = function () {
 
     if (this.y < 60) {
@@ -65,6 +75,10 @@ Player.prototype.update = function () {
 
     this.level = Math.floor(this.score/1000);
 }
+
+/* Function for handling key presses, it takes a string representing the key as a parameter.
+ *  Checks if player is between bounds before processing each movement
+ */
 
 Player.prototype.handleInput = function(keypress) {
     if (keypress === "up") {
@@ -89,6 +103,12 @@ Player.prototype.handleInput = function(keypress) {
     }
 }
 
+/* Check collisions method
+ * First, we calculate the distance between player and enemies coordianates
+ * using the formula derived from Pythagorean theorem. If there is a collision, lifes are decreased by one
+ * and the player is returned to the initial position.
+ * Then, we process collisions between player and gems using the same procedure. 
+ */
 
 Player.prototype.checkCollisions = function() {
     for (enemy in allEnemies) {
@@ -101,17 +121,22 @@ Player.prototype.checkCollisions = function() {
     }  
     if (Math.sqrt((this.x - gem.x)*(this.x - gem.x)+
                   (this.y - gem.y+40)*(this.y - gem.y+40)) < 60) {
-        gem.sprite = gem_choices[Math.floor(Math.random()*3)];
-        gem.x = x_choices[Math.floor(Math.random()*5)];
+        gem.sprite = gem_choices[Math.floor(Math.random()*3)]; // Colour and coordinates of the gem are randomly chosen
+        gem.x = x_choices[Math.floor(Math.random()*5)];        
         gem.y = y_choices[Math.floor(Math.random()*3)];;
         gem.show = false;
-        this.score += 200;
+        this.score += 200; // if there is a collision, the score is increased by 200 points.
     }
 }
 
-var gem_choices = ['images/GemBlue.png','images/GemGreen.png', 'images/GemOrange.png'];
-var x_choices = [30,130,230,335,440];
-var y_choices = [130,220,290]; 
+var gem_choices = ['images/GemBlue.png','images/GemGreen.png', 'images/GemOrange.png']; // set of gems array
+var x_choices = [30,130,230,335,440]; // gems eligible x coordinates
+var y_choices = [130,220,290]; // gems eligible y coordinates
+
+/* Gem constructor.
+ * Colour and coordinates are randomly chosen from correspondent arrays.
+ */
+
 var Gem = function() {
     this.sprite = gem_choices[Math.floor(Math.random()*3)];
     this.x = x_choices[Math.floor(Math.random()*5)];
@@ -119,11 +144,16 @@ var Gem = function() {
     this.show = false;
 }
 
+/* If "show" instance variable is set to true, we use helper method to render the gem. */
+
+
 Gem.prototype.render = function() {
     if (this.show) {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 40, 70);
     }
 }
+
+/* Gem's update method uses a probability function in order to decide when a gem has to be shown. */
 
 Gem.prototype.update = function() {
     if (Math.random() < 0.001) {
@@ -131,10 +161,10 @@ Gem.prototype.update = function() {
         }
 }
 
+/* Player, enemies and gem instantiation */
 
 var player = new Player();
 var gem = new Gem();
-
 var allEnemies = []; 
 
 for (var i = 0; i < 3; i++) {
