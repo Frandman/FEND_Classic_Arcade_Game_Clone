@@ -60,7 +60,7 @@ var Engine = (function(global) {
          * function again as soon as the browser is able to draw another frame.
          */
         win.requestAnimationFrame(main);
-    };
+    }
 
     /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
@@ -82,7 +82,7 @@ var Engine = (function(global) {
      * on the entities themselves within your app.js file).
      */
     function update(dt) {
-        if (player.lifes<1){
+        if (player.lifes < 1) {
             reset();
         }
         updateEntities(dt);
@@ -178,12 +178,12 @@ var Engine = (function(global) {
     }
 
     /* If lifes number falls below 1, reset method is called in order to reset lives and score
-     * 
+     *
      */
     function reset() {
 
         player.score = 0;
-        player.lifes = 3;        
+        player.lifes = 3;
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -196,9 +196,9 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png',
-        'images/Heart.png', 
+        'images/Heart.png',
         'images/GemBlue.png',
-        'images/GemGreen.png', 
+        'images/GemGreen.png',
         'images/GemOrange.png'
     ]);
 
