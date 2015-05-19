@@ -3,7 +3,6 @@ frontend-nanodegree-arcade-game
 
 Download project as a zip file, extract and opens index.html in your browser in order to play the game.
 
+Use arrow keys (up, down, left, right) to avoid enemies and cross the road until you reach the blue area. Don´t forget to collect gems in order to boost your score!
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
-
-for self-checking their submission.
+Enjoy :)
