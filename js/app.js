@@ -83,22 +83,22 @@ Player.prototype.update = function () {
 Player.prototype.handleInput = function(keypress) {
     if (keypress === "up") {
         if (this.y > -20) {
-            this.y -= 80;
+            this.y -= 83;
             }
         }
     else if (keypress === "down") {
         if (this.y < 380) {
-            this.y += 80;
+            this.y += 83;
             }
         }
     else if (keypress == "right") {
         if (this.x < 400) {
-            this.x += 100;
+            this.x += 101;
             }
         }
     else {
         if (this.x > 0) {
-            this.x -= 100;
+            this.x -= 101;
             }
         }
 };
