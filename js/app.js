@@ -24,17 +24,17 @@ Enemy.prototype.update = function(dt) {
         this.x = -60;
         if (player.level === 0) {
             this.speed = Math.floor(Math.random() * 150) + 100;
-            }
+        }
         else if (player.level === 1) {
             this.speed = Math.floor(Math.random() * 250) + 100;
-            }
+        }
         else if (player.level === 2) {
             this.speed = Math.floor(Math.random() * 350) + 100;
-            }
+        }
         else  {
             this.speed = Math.floor(Math.random() * 500) + 100;
-            }
         }
+    }
     this.x += this.speed*dt;
 };
 
@@ -71,8 +71,7 @@ Player.prototype.update = function () {
         this.y = this.initY;
         this.x = this.initX;
         this.score += 100;
-        }
-
+    }
     this.level = Math.floor(this.score/1000);
 };
 
@@ -84,23 +83,23 @@ Player.prototype.handleInput = function(keypress) {
     if (keypress === "up") {
         if (this.y > -20) {
             this.y -= 83;
-            }
         }
+    }
     else if (keypress === "down") {
         if (this.y < 380) {
             this.y += 83;
-            }
         }
+    }
     else if (keypress == "right") {
         if (this.x < 400) {
             this.x += 101;
-            }
         }
+    }
     else {
         if (this.x > 0) {
             this.x -= 101;
-            }
         }
+    }
 };
 
 /* Check collisions method
@@ -117,7 +116,7 @@ Player.prototype.checkCollisions = function() {
             this.x = this.initX;
             this.y = this.initY;
             this.lifes -=1;
-            }
+        }
     }
     if (Math.sqrt((this.x - gem.x)*(this.x - gem.x)+
         (this.y - gem.y+40)*(this.y - gem.y+40)) < 60) {
@@ -126,7 +125,7 @@ Player.prototype.checkCollisions = function() {
         gem.y = y_choices[Math.floor(Math.random()*3)];
         gem.show = false;
         this.score += 200; // if there is a collision, the score is increased by 200 points.
-        }
+    }
 };
 
 var gem_choices = ['images/GemBlue.png','images/GemGreen.png', 'images/GemOrange.png']; // set of gems array
@@ -149,7 +148,7 @@ var Gem = function() {
 Gem.prototype.render = function() {
     if (this.show) {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 40, 70);
-        }
+    }
 };
 
 /* Gem's update method uses a probability function in order to decide when a gem has to be shown. */
@@ -157,7 +156,7 @@ Gem.prototype.render = function() {
 Gem.prototype.update = function() {
     if (Math.random() < 0.001) {
         this.show = true;
-        }
+    }
 };
 
 /* Player, enemies and gem instantiation */
